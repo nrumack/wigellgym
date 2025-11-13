@@ -2,7 +2,7 @@ package com.example.WigellGym.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class GymBookingDTO {
@@ -13,7 +13,7 @@ public class GymBookingDTO {
     @NotNull
     private UUID customerId;
 
-    private Date bookedAt;
+    private LocalDateTime bookedAt;
 
     public UUID getId() {
         return id;
@@ -39,11 +39,11 @@ public class GymBookingDTO {
         this.customerId = customerId;
     }
 
-    public Date getBookedAt() {
+    public LocalDateTime getBookedAt() {
         return bookedAt;
     }
 
-    public void setBookedAt(Date bookedAt) {
+    public void setBookedAt(LocalDateTime bookedAt) {
         this.bookedAt = bookedAt;
     }
 }

@@ -1,5 +1,8 @@
 package com.example.WigellGym.dto;
 
+import com.example.WigellGym.enums.WorkoutType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
@@ -13,7 +16,8 @@ public class GymInstructorDTO {
     @NotBlank
     private String lastName;
 
-    private String specialization;
+    @Enumerated(EnumType.STRING)
+    private WorkoutType workoutType;
 
     public UUID getInstructorId() {
         return instructorId;
@@ -39,11 +43,11 @@ public class GymInstructorDTO {
         this.lastName = lastName;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public WorkoutType getWorkoutType() {
+        return workoutType;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setWorkoutType(WorkoutType workoutType) {
+        this.workoutType = workoutType;
     }
 }

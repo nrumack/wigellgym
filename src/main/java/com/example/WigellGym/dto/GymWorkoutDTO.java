@@ -1,28 +1,31 @@
 package com.example.WigellGym.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import com.example.WigellGym.enums.WorkoutType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class GymWorkoutDTO {
     private UUID workoutId;
 
-    @NotBlank
-    private String name;
+    private WorkoutType workoutType;
 
     @NotNull
-    private Long participants;
+    private Long maxParticipants;
 
     @NotNull
-    private Long price;
+    private double priceSek;
+
+    private double priceEur;
 
     @NotNull
     private UUID instructorId;
 
     @NotNull
-    private Date scheduledAt;
+    private LocalDateTime scheduledAt;
 
     public UUID getWorkoutId() {
         return workoutId;
@@ -32,29 +35,33 @@ public class GymWorkoutDTO {
         this.workoutId = workoutId;
     }
 
-    public String getName() {
-        return name;
+    public WorkoutType getWorkoutType() {
+        return workoutType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWorkoutType(WorkoutType workoutType) {
+        this.workoutType = workoutType;
     }
 
-    public Long getParticipants() {
-        return participants;
+    public Long getMaxParticipants() {
+        return maxParticipants;
     }
 
-    public void setParticipants(Long participants) {
-        this.participants = participants;
+    public void setMaxParticipants(Long maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 
-    public Long getPrice() {
-        return price;
+    public double getPriceSek() {
+        return priceSek;
     }
 
-    public void setPrice(Long price) {
-        this.price = price;
+    public void setPriceSek(double priceSek) {
+        this.priceSek = priceSek;
     }
+
+    public double getPriceEur() { return priceEur; }
+
+    public void setPriceEur(double priceEur) { this.priceEur = priceEur; }
 
     public UUID getInstructorId() {
         return instructorId;
@@ -64,11 +71,11 @@ public class GymWorkoutDTO {
         this.instructorId = instructorId;
     }
 
-    public Date getScheduledAt() {
+    public LocalDateTime getScheduledAt() {
         return scheduledAt;
     }
 
-    public void setScheduledAt(Date scheduledAt) {
+    public void setScheduledAt(LocalDateTime scheduledAt) {
         this.scheduledAt = scheduledAt;
     }
 }

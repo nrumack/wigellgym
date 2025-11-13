@@ -12,7 +12,7 @@ public class GymInstructorConverter {
         dto.setInstructorId(gymInstructor.getId());
         dto.setFirstName(gymInstructor.getFirstName());
         dto.setLastName(gymInstructor.getLastName());
-        dto.setSpecialization(gymInstructor.getSpecialization());
+        dto.setWorkoutType(gymInstructor.getWorkoutType());
         return dto;
     }
 
@@ -21,7 +21,7 @@ public class GymInstructorConverter {
         gymInstructor.setId(dto.getInstructorId());
         gymInstructor.setFirstName(dto.getFirstName());
         gymInstructor.setLastName(dto.getLastName());
-        gymInstructor.setSpecialization(dto.getSpecialization());
+        gymInstructor.setWorkoutType(dto.getWorkoutType());
         return gymInstructor;
     }
 }

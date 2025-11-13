@@ -1,8 +1,8 @@
 package com.example.WigellGym.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.example.WigellGym.enums.WorkoutType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
@@ -14,20 +14,25 @@ public class GymInstructor {
     @UuidGenerator
     private UUID id;
 
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
-    private String specialization;
+
+    @Enumerated(EnumType.STRING)
+    private WorkoutType workoutType;
 
     @OneToMany(mappedBy = "instructor")
     private List<GymWorkout> workouts;
 
     public GymInstructor() {}
 
-    public GymInstructor(UUID id, String firstName, String lastName, String specialization, List<GymWorkout> workouts) {
+    public GymInstructor(UUID id, String firstName, String lastName, WorkoutType workoutType, List<GymWorkout> workouts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.specialization = specialization;
+        this.workoutType = workoutType;
         this.workouts = workouts;
     }
 
@@ -55,9 +60,9 @@ public class GymInstructor {
         this.lastName = lastName;
     }
 
-    public String getSpecialization() { return specialization; }
+    public WorkoutType getWorkoutType() { return workoutType; }
 
-    public void setSpecialization(String specialization) { this.specialization = specialization; }
+    public void setWorkoutType(WorkoutType workoutType) { this.workoutType = workoutType; }
 
     public List<GymWorkout> getWorkouts() {
         return workouts;

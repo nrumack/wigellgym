@@ -1,4 +1,4 @@
-package com.example.WigellGym.security;
+package com.example.WigellGym.helpers;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

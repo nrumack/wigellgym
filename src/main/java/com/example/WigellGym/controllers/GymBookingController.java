@@ -3,11 +3,11 @@ package com.example.WigellGym.controllers;
 import com.example.WigellGym.converters.GymBookingConverter;
 import com.example.WigellGym.dto.BookingResponseDTO;
 import com.example.WigellGym.dto.GymWorkoutDTO;
-import com.example.WigellGym.entities.GymBooking;
 import com.example.WigellGym.services.GymBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,39 +27,39 @@ public class GymBookingController {
     }
 
     @PostMapping("/bookworkout/{workoutId}")
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<BookingResponseDTO> bookWorkout(@PathVariable UUID workoutId) {
         BookingResponseDTO response = gymBookingService.bookGymWorkout(workoutId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-
     @GetMapping ("/mybookings")
-    //customers previous bookings
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<List<GymWorkoutDTO>> getAllPreviousBookings() {
         return ResponseEntity.ok(gymBookingService.getAllPreviousWorkouts());
     }
 
     @PutMapping("/cancelworkout/{id}")
-    //customer cancels workout atleast 24 hours ahead
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<BookingResponseDTO> cancelWorkout(@PathVariable UUID id) {
         BookingResponseDTO canceled = gymBookingService.cancelWorkout(id);
         return ResponseEntity.ok(canceled);
     }
 
     @GetMapping("/listcanceled")
-    //admin sees all the cancelled booked workouts
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<BookingResponseDTO>> getAllCanceledBookings() {
         return ResponseEntity.ok(gymBookingService.listCanceledWorkouts());
     }
 
     @GetMapping("/listupcoming")
-    //Admin lists all upcoming booked workouts
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<BookingResponseDTO>> getAllUpcomingBookings() {
         return ResponseEntity.ok(gymBookingService.listUpcomingWorkouts());
     }
 
     @GetMapping("/listpastbookings")
-    //admin is able to see booked workouts that have already happened
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<BookingResponseDTO>> getAllPastBookings() {
         return ResponseEntity.ok(gymBookingService.listPastWorkouts());
     }

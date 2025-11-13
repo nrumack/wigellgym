@@ -2,10 +2,10 @@ package com.example.WigellGym.controllers;
 
 import com.example.WigellGym.converters.GymInstructorConverter;
 import com.example.WigellGym.dto.GymInstructorDTO;
-import com.example.WigellGym.entities.GymInstructor;
 import com.example.WigellGym.services.GymInstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,25 +14,24 @@ import java.util.List;
 @RequestMapping("/api/wigellgym")
 public class GymInstructorController {
     private final GymInstructorService gymInstructorService;
-    private final GymInstructorConverter gymInstructorConverter;
 
     @Autowired
-    public GymInstructorController(GymInstructorService gymInstructorService, GymInstructorConverter gymInstructorConverter) {
+    public GymInstructorController(GymInstructorService gymInstructorService) {
         this.gymInstructorService = gymInstructorService;
-        this.gymInstructorConverter = gymInstructorConverter;
     }
 
     @GetMapping("/instructors")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<GymInstructorDTO>> getAllInstructors() {
         List<GymInstructorDTO> instructors = gymInstructorService.getAllInstructors();
         return ResponseEntity.ok(instructors);
     }
 
     @PostMapping("/addinstructor")
-    //@PreAuthorize("hasRole('Admin")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<GymInstructorDTO> addInstructor(@RequestBody GymInstructorDTO gymInstructorDTO) {
-        GymInstructor newInstructor = gymInstructorService.addInstructor(gymInstructorDTO);
-        return ResponseEntity.ok(gymInstructorConverter.toDto(newInstructor));
+        GymInstructorDTO newInstructor = gymInstructorService.addInstructor(gymInstructorDTO);
+        return ResponseEntity.ok(newInstructor);
     }
 
 }

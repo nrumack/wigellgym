@@ -1,14 +1,23 @@
 package com.example.WigellGym.dto;
 
-import java.util.Date;
+import jakarta.validation.constraints.NotNull;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class BookingResponseDTO {
+    @NotNull
     private UUID bookingId;
-    private Date bookedAt;
+
+    @NotNull
+    private LocalDateTime bookedAt;
+
     private boolean canceled;
 
-    private GymWorkoutDTO gymWorkout;
+    private BigDecimal priceEur;
+
+    private GymWorkoutDTO gymWorkoutDTO;
 
     public UUID getBookingId() {
         return bookingId;
@@ -18,11 +27,11 @@ public class BookingResponseDTO {
         this.bookingId = bookingId;
     }
 
-    public Date getBookedAt() {
+    public LocalDateTime getBookedAt() {
         return bookedAt;
     }
 
-    public void setBookedAt(Date bookedAt) {
+    public void setBookedAt(LocalDateTime bookedAt) {
         this.bookedAt = bookedAt;
     }
 
@@ -34,11 +43,15 @@ public class BookingResponseDTO {
         this.canceled = canceled;
     }
 
+    public BigDecimal getPriceEur() { return priceEur; }
+
+    public void setPriceEur(BigDecimal priceEur) { this.priceEur = priceEur; }
+
     public GymWorkoutDTO getGymWorkout() {
-        return gymWorkout;
+        return gymWorkoutDTO;
     }
 
-    public void setGymWorkout(GymWorkoutDTO gymWorkout) {
-        this.gymWorkout = gymWorkout;
+    public void setGymWorkout(GymWorkoutDTO gymWorkoutDTO) {
+        this.gymWorkoutDTO = gymWorkoutDTO;
     }
 }
